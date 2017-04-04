@@ -48,13 +48,13 @@ public class JobController {
         }
 
         Job newJob= new Job(jobForm.getName(),
-                jobData.findById(jobForm.getEmployerId()).getEmployer(),
-                            jobData.findById(jobForm.getLocationId()).getLocation(),
-                            jobData.findById(jobForm.getPositionTypeId()).getPositionType(),
-                            jobData.findById(jobForm.getCoreCompetencyId()).getCoreCompetency());
+                jobData.getEmployers().findById(jobForm.getEmployerId()),
+                            jobData.getLocations().findById(jobForm.getLocationId()),
+                            jobData.getPositionTypes().findById(jobForm.getPositionTypeId()),
+                            jobData.getCoreCompetencies().findById(jobForm.getCoreCompetencyId()));
         jobData.add(newJob);
         model.addAttribute("job",newJob);
-        return "job-detail";
+        return "redirect:/job?id="+(newJob.getId());
 
     }
 }
